@@ -22,7 +22,9 @@ app = Flask(__name__)
 
 @app.route('/competitors')
 def hello_world():
-    return 'Hello World!'
+    with open("competitors.json") as fin:
+        ret = fin.read()
+        return ret
 
 if __name__ == '__main__':
     app.run()

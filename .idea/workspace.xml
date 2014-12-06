@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="competitors.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="competitors.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/competitors.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="19" selection-start="115" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="495">
+            <state line="26" column="18" selection-start="520" selection-end="520" vertical-scroll-proportion="0.59302324" vertical-offset="237" max-vertical-offset="525">
               <folding />
             </state>
           </provider>
@@ -43,10 +43,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="competitors.json" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="competitors.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/competitors.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="9" selection-start="0" selection-end="16800" vertical-scroll-proportion="0.38626608" vertical-offset="15" max-vertical-offset="16650">
+            <state line="7" column="9" selection-start="0" selection-end="16800" vertical-scroll-proportion="-4.2" vertical-offset="0" max-vertical-offset="16650">
               <folding />
             </state>
           </provider>
@@ -62,8 +62,8 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/competitors.py" />
         <option value="$PROJECT_DIR$/competitor_generator.py" />
+        <option value="$PROJECT_DIR$/competitors.py" />
       </list>
     </option>
   </component>
@@ -264,10 +264,10 @@
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43589744" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43589744" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24966443" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24966443" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -299,13 +299,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/competitors.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="19" selection-start="115" selection-end="115" vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="495">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/competitor_generator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="40" selection-start="991" selection-end="991" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1035">
@@ -317,7 +310,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/competitors.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="9" selection-start="0" selection-end="16800" vertical-scroll-proportion="0.38626608" vertical-offset="15" max-vertical-offset="16650">
+        <state line="7" column="9" selection-start="0" selection-end="16800" vertical-scroll-proportion="-4.2" vertical-offset="0" max-vertical-offset="16650">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/competitors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="18" selection-start="520" selection-end="520" vertical-scroll-proportion="0.59302324" vertical-offset="237" max-vertical-offset="525">
           <folding />
         </state>
       </provider>

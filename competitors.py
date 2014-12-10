@@ -1,6 +1,5 @@
 __author__ = '212391398'
 
-
 #{
 #    "competitors": [
 #        {

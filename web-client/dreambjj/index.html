@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html >
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Dream BJJ Bracketology</title>
+</head>
+<body ng-app="dreambjj">
+<script src="js/angular.js"></script>
+<script src="js/app.js"></script>
+<p>Dream BJJ Bracket</p>
+<div ng-controller='homeController' class="weather">
+
+    <div>
+        Tournament Level: {{ level }}
+
+        <form name="matchForm" >
+            Competitor 1 rank: <input type="number" name="input" ng-model="formData.inputRank1"><br>
+            Competitor 2 rank: <input type="number" name="input" ng-model="formData.inputRank2"><br>
+            <div class="radio">
+                <input type="radio" name="sub2" value="-1.5" ng-model="formData.matchResult">2 wins by sub
+                <input type="radio" name="win2" value="-1.0" ng-model="formData.matchResult">2 wins
+                <input type="radio" name="draw" value="0.5" checked ng-model="formData.matchResult">draw
+                <input type="radio" name="win1" value="1.0" ng-model="formData.matchResult">1 wins
+                <input type="radio" name="sub1" value="1.5" ng-model="formData.matchResult">1 wins by sub
+             </div>
+            <button ng-click='getCalculation()'>Submit Match</button>
+        </form>
+
+        <div>
+            rank is {{ results }} <br>
+
+            elo 1: {{ rank1 }} <br>
+            elo 2: {{ rank2 }} <br>
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+</html>

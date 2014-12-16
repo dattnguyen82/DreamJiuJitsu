@@ -17,8 +17,6 @@ angular.module('dreambjj', [])
         $scope.brackets = [[]];
 
         $scope.competitors = null;
-        $scope.currentMatchIndex = 0;
-
         $scope.totalBrackets = 0;
 
         var load_brackets = function()
@@ -141,7 +139,24 @@ angular.module('dreambjj', [])
                 }
             }
 
-            return competitor
+            return competitor;
+        }
+
+        var get_bracket_by_id = function(id)
+        {
+            var bracket = null;
+
+            for (var i=0; i<$scope.brackets.length; i++) {
+                for (var j = 0; j < $scope.brackets[i].length; j++) {
+                    var b = $scope.brackets[i][j];
+                    if (b.id == id) {
+                        bracket =  $scope.brackets[i][j];
+                        break;
+                    }
+                }
+            }
+
+            return bracket;
         }
 
         var find_or_insert_new_bracket = function(currentBracket, winner)
@@ -190,39 +205,41 @@ angular.module('dreambjj', [])
             factor = (typeof( $scope.formData.matchKFactor ) != 'undefined') ? $scope.formData.matchKFactor : 10;
             //console.log(factor)
 
-            $scope.currentMatchIndex = bracketIndex
-            //console.log($scope.currentMatchIndex);
-
-            var bracket = $scope.brackets[bracketLevel][bracketIndex];
+            var bracket = get_bracket_by_id(bracketIndex) //$scope.brackets[bracketLevel][bracketIndex];
 
             var c1 = get_competitor_by_id(bracket.c1.id);
             var c2 = get_competitor_by_id(bracket.c2.id);
+            var winner = null
 
-            var c1rank = (c1 != null) ? c1.rank : 0;
-            var c2rank = (c2 != null) ? c2.rank : 0;
+            if (c2 != null)
+            {
+                var c1rank = (c1 != null) ? c1.rank : 0;
+                var c2rank = (c2 != null) ? c2.rank : 0;
 
-            var newRanking = calculate_rank(factor, c1rank, c2rank, bracket.result)
+                var newRanking = calculate_rank(factor, c1rank, c2rank, bracket.result)
 
-            //console.log(newRanking.rank1)
-            //console.log(newRanking.rank2)
+                if (c1 != null) {
+                    update_competitor_ranking(c1.id, newRanking.rank1)
+                }
 
-            if (c1 != null) {
-                update_competitor_ranking(c1.id, newRanking.rank1)
+                if (c2 != null) {
+                    update_competitor_ranking(c2.id, newRanking.rank2)
+                }
+
+                //temp: update ui
+                bracket.c1.rank = newRanking.rank1;
+                bracket.c2.rank = newRanking.rank2;
+
+                winner = (bracket.result > 0) ? c1 : c2;
             }
-
-            if (c2 != null) {
-                update_competitor_ranking(c2.id, newRanking.rank2)
+            else //this match was a bye
+            {
+                winner = c1;
             }
-
-            //temp
-            $scope.brackets[bracketLevel][bracketIndex].c1.rank = newRanking.rank1;
-            $scope.brackets[bracketLevel][bracketIndex].c2.rank = newRanking.rank2;
-
-            var winner = (bracket.result > 0) ? c1 : c2;
 
             find_or_insert_new_bracket( bracket, winner );
 
-            $scope.brackets[bracketLevel][bracketIndex].disabled = true;
+            bracket.disabled = true;
         };
 
         $scope.getBracketSize = function()
@@ -254,8 +271,8 @@ angular.module('dreambjj', [])
         return function(level) {
             this.id = totalBrackets++;
             this.level = level;
-            this.c1 = {id:-1, name: "", rank:0};
-            this.c2 = {id:-1, name: "", rank:0};
+            this.c1 = {id:-1, name: "--", rank:0};
+            this.c2 = {id:-1, name: "--", rank:0};
             this.result = 0.0;
             this.disabled = false;
         }

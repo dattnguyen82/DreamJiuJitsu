@@ -12,10 +12,10 @@
                         Match result:
                         <select ng-model="bracket.result">
                             <!-- <option value="0.5" selected="selected">Draw</option> #f0f8ff -->
-                            <option value="1.5">1 wins by submission</option>
-                            <option value="1.0">1 wins by points</option>
-                            <option value="-1.5">2 wins by submission</option>
-                            <option value="-1.0">2 wins by points</option>
+                            <option value="1.5">{{ bracket.c1.name }} wins by submission</option>
+                            <option value="1.0">{{ bracket.c1.name }} wins by points</option>
+                            <option value="-1.5">{{ bracket.c2.name }} wins by submission</option>
+                            <option value="-1.0">{{ bracket.c2.name }} wins by points</option>
                         </select>
 
                         <input type="text" name="bracketIndex" ng-value="bracket.id" style="display: none;"/>

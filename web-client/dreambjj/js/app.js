@@ -151,12 +151,9 @@ angular.module('dreambjj', [])
             var currentLevel = currentBracket.level
             var newLevel = currentLevel + 1;
 
-            console.log(currentLevel + "," + newLevel);
-
             for (var i=0; i<$scope.brackets.length; i++) {
                 for (var j = 0; j < $scope.brackets[i].length; j++) {
                     var b = $scope.brackets[i][j];
-                    //console.log(b.level + "," + newLevel);
                     if (b.level == newLevel) {
                         if (b.c2.id == -1) {
                             $scope.brackets[i][j].c2.id = winner.id;

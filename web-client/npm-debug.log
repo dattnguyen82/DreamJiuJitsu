@@ -1,0 +1,106 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'gzippo',
+1 verbose cli   'express',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose config Skipping project config: /Users/212391398/.npmrc. (matches userconfig)
+5 warn package.json karma-chrome-launcher@0.1.4 No README data
+6 verbose cache add [ 'gzippo', null ]
+7 verbose cache add name=undefined spec="gzippo" args=["gzippo",null]
+8 verbose parsed url { protocol: null,
+8 verbose parsed url   slashes: null,
+8 verbose parsed url   auth: null,
+8 verbose parsed url   host: null,
+8 verbose parsed url   port: null,
+8 verbose parsed url   hostname: null,
+8 verbose parsed url   hash: null,
+8 verbose parsed url   search: null,
+8 verbose parsed url   query: null,
+8 verbose parsed url   pathname: 'gzippo',
+8 verbose parsed url   path: 'gzippo',
+8 verbose parsed url   href: 'gzippo' }
+9 verbose cache add [ 'express', null ]
+10 verbose cache add name=undefined spec="express" args=["express",null]
+11 verbose parsed url { protocol: null,
+11 verbose parsed url   slashes: null,
+11 verbose parsed url   auth: null,
+11 verbose parsed url   host: null,
+11 verbose parsed url   port: null,
+11 verbose parsed url   hostname: null,
+11 verbose parsed url   hash: null,
+11 verbose parsed url   search: null,
+11 verbose parsed url   query: null,
+11 verbose parsed url   pathname: 'express',
+11 verbose parsed url   path: 'express',
+11 verbose parsed url   href: 'express' }
+12 silly lockFile bfe3231d-gzippo gzippo
+13 verbose lock gzippo /Users/212391398/.npm/bfe3231d-gzippo.lock
+14 silly lockFile f3c62de4-express express
+15 verbose lock express /Users/212391398/.npm/f3c62de4-express.lock
+16 silly lockFile bfe3231d-gzippo gzippo
+17 silly lockFile bfe3231d-gzippo gzippo
+18 silly lockFile f3c62de4-express express
+19 silly lockFile f3c62de4-express express
+20 verbose addNamed [ 'gzippo', '' ]
+21 verbose addNamed [ null, '*' ]
+22 silly lockFile cd6ce3bd-gzippo gzippo@
+23 verbose lock gzippo@ /Users/212391398/.npm/cd6ce3bd-gzippo.lock
+24 verbose addNamed [ 'express', '' ]
+25 verbose addNamed [ null, '*' ]
+26 silly lockFile 64a534c1-express express@
+27 verbose lock express@ /Users/212391398/.npm/64a534c1-express.lock
+28 silly addNameRange { name: 'gzippo', range: '*', hasData: false }
+29 verbose request where is /gzippo
+30 verbose request registry http://registry.npmjs.org/
+31 verbose request id 1913f9e98d950454
+32 verbose url raw /gzippo
+33 verbose url resolving [ 'http://registry.npmjs.org/', './gzippo' ]
+34 verbose url resolved http://registry.npmjs.org/gzippo
+35 verbose request where is http://registry.npmjs.org/gzippo
+36 info trying registry request attempt 1 at 20:20:33
+37 http GET http://registry.npmjs.org/gzippo
+38 silly addNameRange { name: 'express', range: '*', hasData: false }
+39 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+40 verbose request where is /express
+41 verbose request registry http://registry.npmjs.org/
+42 verbose url raw /express
+43 verbose url resolving [ 'http://registry.npmjs.org/', './express' ]
+44 verbose url resolved http://registry.npmjs.org/express
+45 verbose request where is http://registry.npmjs.org/express
+46 info trying registry request attempt 1 at 20:20:33
+47 http GET http://registry.npmjs.org/express
+48 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+49 info trying registry request attempt 2 at 20:20:43
+50 http GET http://registry.npmjs.org/gzippo
+51 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+52 info trying registry request attempt 2 at 20:20:43
+53 http GET http://registry.npmjs.org/express
+54 info retry will retry, error on last attempt: Error: getaddrinfo ENOTFOUND
+55 info trying registry request attempt 3 at 20:21:43
+56 http GET http://registry.npmjs.org/gzippo
+57 info trying registry request attempt 3 at 20:21:43
+58 http GET http://registry.npmjs.org/express
+59 silly lockFile 64a534c1-express express@
+60 silly lockFile 64a534c1-express express@
+61 silly lockFile cd6ce3bd-gzippo gzippo@
+62 silly lockFile cd6ce3bd-gzippo gzippo@
+63 error network getaddrinfo ENOTFOUND
+63 error network This is most likely not a problem with npm itself
+63 error network and is related to network connectivity.
+63 error network In most cases you are behind a proxy or have bad network settings.
+63 error network
+63 error network If you are behind a proxy, please make sure that the
+63 error network 'proxy' config is set properly.  See: 'npm help config'
+64 error System Darwin 13.4.0
+65 error command "node" "/usr/local/bin/npm" "install" "gzippo" "express" "--save"
+66 error cwd /Users/212391398/source/DreamJiuJitsu/web-client
+67 error node -v v0.10.33
+68 error npm -v 1.4.28
+69 error syscall getaddrinfo
+70 error code ENOTFOUND
+71 error errno ENOTFOUND
+72 verbose exit [ 1, true ]

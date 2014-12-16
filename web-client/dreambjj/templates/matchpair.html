@@ -1,0 +1,30 @@
+<div xmlns="http://www.w3.org/1999/html">
+    <form name="matchForm" >
+        <table border="1" cellspacing="5" cellpadding="5" width="480">
+            <tr><td colspan="2" align="center" bgcolor="15792383">Match: {{ bracket.id }}, level: {{ bracket.level }}</td></tr>
+
+            <tr><td>name: {{ bracket.c1.name }}</td><td>rank: {{ bracket.c1.rank }}</td></tr>
+            <tr><td>name: {{ bracket.c2.name }}</td><td>rank: {{ bracket.c2.rank }}</td></tr>
+
+            <tr>
+                <div class="result">
+                    <td colspan="2">
+                        Match result:
+                        <select ng-model="bracket.result">
+                            <!-- <option value="0.5" selected="selected">Draw</option> #f0f8ff -->
+                            <option value="1.5">1 wins by submission</option>
+                            <option value="1.0">1 wins by points</option>
+                            <option value="-1.5">2 wins by submission</option>
+                            <option value="-1.0">2 wins by points</option>
+                        </select>
+
+                        <input type="text" name="bracketIndex" ng-value="bracket.id" style="display: none;"/>
+
+                        <button ng-click='submitMatchResult(bracket.level, bracket.id)' ng-disabled="bracket.disabled">Submit Match</button>
+                    </td>
+                 </div>
+            </tr>
+        </table>
+    </form>
+</div>
+<br>

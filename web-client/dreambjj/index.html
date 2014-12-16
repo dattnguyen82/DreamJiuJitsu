@@ -11,28 +11,42 @@
 <div ng-controller='homeController' class="weather">
 
     <div>
-        Tournament Level: {{ level }}
+        <!--
+        <table border="1" cellpadding="5" cellspacing="5" width="640">
+            <tr><td align="center" bgcolor="#f0f8ff">Calculate Bracket Size</td></tr>
+            <tr><td>
+                <form name="bracketForm">
+                Number of competitors <input type="number" name="input" ng-model="formData.count">
+                </form>
+            </td></tr>
+            <tr><td align="center"><button ng-click='getBracketSize()'>Get Bracket Size</button></td></tr>
+            <tr><td>Bracket size: <b>{{ bracketSize }}</b></td></tr>
+        </table>
+        <br><br>
+        -->
+
+        <table border="1" cellspacing="5" cellpadding="5" width="640">
+        <tr><td colspan="4" align="center" bgcolor="#f0f8ff">Tournament Level</td></tr>
+            <tr>
+                <div class="level">
+                    <td><input type="radio" name="black" value="20" ng-model="formData.matchKFactor">black (k=20)</td>
+                    <td><input type="radio" name="brownpurple" value="15" ng-model="formData.matchKFactor">purple/brown (k=15)</td>
+                    <td><input type="radio" name="bluewhite" value="10" checked ng-model="formData.matchKFactor">white/blue (k=10)</td>
+                    <td><input type="radio" name="kids" value="5" ng-model="formData.matchKFactor">kids (k=5)</td>
+                </div>
+            </tr>
+        </table>
+        <br><br>
 
         <form name="matchForm" >
-            Competitor 1 rank: <input type="number" name="input" ng-model="formData.inputRank1"><br>
-            Competitor 2 rank: <input type="number" name="input" ng-model="formData.inputRank2"><br>
-            <div class="radio">
-                <input type="radio" name="sub2" value="-1.5" ng-model="formData.matchResult">2 wins by sub
-                <input type="radio" name="win2" value="-1.0" ng-model="formData.matchResult">2 wins
-                <input type="radio" name="draw" value="0.5" checked ng-model="formData.matchResult">draw
-                <input type="radio" name="win1" value="1.0" ng-model="formData.matchResult">1 wins
-                <input type="radio" name="sub1" value="1.5" ng-model="formData.matchResult">1 wins by sub
-             </div>
-            <button ng-click='getCalculation()'>Submit Match</button>
+         <button ng-click='loadBrackets()'>Load Brackets</button>
         </form>
-
-        <div>
-            rank is {{ results }} <br>
-
-            elo 1: {{ rank1 }} <br>
-            elo 2: {{ rank2 }} <br>
+        <br>
+        <div ng-repeat="bracketList in brackets">
+            <div ng-repeat="bracket in bracketList">
+                <div matchpair></div>
+            </div>
         </div>
-
 
     </div>
 

@@ -1,0 +1,54 @@
+{
+    "competitors" : [
+        {
+            "id": 100,
+            "name": "Adelita",
+            "rank": 1500
+        },
+        {
+            "id": 101,
+            "name": "Mckenna",
+            "rank": 1500
+        },
+        {
+            "id": 102,
+            "name": "Tyra",
+            "rank": 1500
+        },
+        {
+            "id": 103,
+            "name": "Melissa",
+            "rank": 1500
+        },
+        {
+            "id": 104,
+            "name": "Jessie",
+            "rank": 1500
+        },
+        {
+            "id": 105,
+            "name": "Erica",
+            "rank": 1500
+        },
+        {
+            "id": 106,
+            "name": "Viviana",
+            "rank": 1500
+        },
+        {
+            "id": 107,
+            "name": "Talita",
+            "rank": 1500
+        },
+        {
+            "id": 108,
+            "name": "Marion",
+            "rank": 1500
+        },
+        {
+            "id": 109,
+            "name": "Mayra",
+            "rank": 1500
+        }
+    ]
+}

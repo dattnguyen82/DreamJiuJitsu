@@ -9,6 +9,22 @@ angular.module('dreambjj', [])
             SUB1: 1.5
         };
 
+        var bracketColorArray = [
+            '#248FB2',
+            '#29A3CC',
+            '#2EB8E6',
+            '#33CCFF',
+            '#47D1FF',
+            '#5CD6FF',
+            '#70DBFF',
+            '#85E0FF',
+            '#99E6FF',
+            '#ADEBFF',
+            '#C2F0FF',
+            '#D6F5FF',
+            '#EBFAFF'
+        ];
+
         $scope.formData = { };
 
         $scope.beltLevel = 20;
@@ -32,7 +48,8 @@ angular.module('dreambjj', [])
             calculate_bracket_size(competitorCount)
 
             for (var i=0; i< $scope.tournamentSize; i++) {
-                $scope.brackets[0][i] = new bracketMaker(0)
+                $scope.brackets[0][i] = new bracketMaker(0);
+                $scope.brackets[0][i].color = bracketColorArray[0];
             }
 
             //fill brackets
@@ -197,12 +214,16 @@ angular.module('dreambjj', [])
                 if ($scope.brackets[newLevel] != null) {
                     bracketSize = $scope.brackets[newLevel].length;
                 }
+                else {
+                    $scope.brackets[newLevel] = [];
+                }
 
-                $scope.brackets[newLevel] = [];
                 $scope.brackets[newLevel][bracketSize] = new bracketMaker(newLevel);
                 $scope.brackets[newLevel][bracketSize].c1.id = winner.id;
                 $scope.brackets[newLevel][bracketSize].c1.name = winner.name;
                 $scope.brackets[newLevel][bracketSize].c1.rank = winner.rank;
+                var color = (newLevel % bracketColorArray.length);
+                $scope.brackets[newLevel][bracketSize].color = bracketColorArray[newLevel];
 
             }
         }
@@ -310,6 +331,7 @@ angular.module('dreambjj', [])
             this.c2 = {id:-1, name: "--", rank:0};
             this.result = 0.0;
             this.disabled = false;
+            this.color = '#FFFFFF'
         }
     })
     .factory('dataLoader', function($http){

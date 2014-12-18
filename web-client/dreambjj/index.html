@@ -8,12 +8,12 @@
 <script src="js/angular.js"></script>
 <script src="js/app.js"></script>
 <script src="js/filereader.js"></script>
-<p>Dream BJJ Bracket</p>
+<h1><p class="mono">Dream BJJ Bracket</p></h1>
 <div ng-controller='homeController' class="weather">
-
     <div>
-        <table border="1" cellspacing="5" cellpadding="5" width="640">
-        <tr><td colspan="4" align="center" bgcolor="#f0f8ff">Tournament Level</td></tr>
+        <p class="mono">
+        <table border="1" cellspacing="2" cellpadding="2" width="640">
+        <tr><td colspan="4" align="center" bgcolor="#BBBBBB">Tournament Level</td></tr>
             <tr>
                 <div class="level">
                     <td><input type="radio" name="black" value="20" ng-model="beltLevel">black (k=20)</td>
@@ -50,9 +50,8 @@
                 <div matchpair></div>
             </div>
         </div>
-
+        </p>
     </div>
-
 </div>
 </body>
 </html>

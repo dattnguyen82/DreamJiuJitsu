@@ -7,6 +7,7 @@
 <body ng-app="dreambjj">
 <script src="js/angular.js"></script>
 <script src="js/app.js"></script>
+<script src="js/filereader.js"></script>
 <p>Dream BJJ Bracket</p>
 <div ng-controller='homeController' class="weather">
 
@@ -15,18 +16,34 @@
         <tr><td colspan="4" align="center" bgcolor="#f0f8ff">Tournament Level</td></tr>
             <tr>
                 <div class="level">
-                    <td><input type="radio" name="black" value="20" ng-model="formData.matchKFactor">black (k=20)</td>
-                    <td><input type="radio" name="brownpurple" value="15" ng-model="formData.matchKFactor">purple/brown (k=15)</td>
-                    <td><input type="radio" name="bluewhite" value="10" checked ng-model="formData.matchKFactor">white/blue (k=10)</td>
-                    <td><input type="radio" name="kids" value="5" ng-model="formData.matchKFactor">kids (k=5)</td>
+                    <td><input type="radio" name="black" value="20" ng-model="beltLevel">black (k=20)</td>
+                    <td><input type="radio" name="brownpurple" value="15" ng-model="beltLevel">purple/brown (k=15)</td>
+                    <td><input type="radio" name="bluewhite" value="10" checked ng-model="beltLevel">white/blue (k=10)</td>
+                    <td><input type="radio" name="kids" value="5" ng-model="beltLevel">kids (k=5)</td>
                 </div>
             </tr>
         </table>
         <br><br>
 
+
+        <b>Select competitor list file</b>
+        <div ng-controller="UploadController ">
+            <form>
+                <input type="file" ng-file-select="onFileSelect($files)" >
+            </form>
+<!--
+            Progress: <progress value="{{progress}}"></progress>
+-->
+        </div>
+
+        <br>
+<!--
+
         <form name="matchForm" >
          <button ng-click='loadBrackets()'>Load Brackets</button>
         </form>
+-->
+
         <br>
         <div ng-repeat="bracketList in brackets">
             <div ng-repeat="bracket in bracketList">

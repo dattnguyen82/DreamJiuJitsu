@@ -9,7 +9,11 @@ angular.module('dreambjj', [])
             SUB1: 1.5
         };
 
-        $scope.formData = {};
+        $scope.formData = { };
+
+        $scope.beltLevel = 20;
+
+        $scope.competitorFile = "";
 
         maxBracket = 8192;
 
@@ -19,45 +23,49 @@ angular.module('dreambjj', [])
         $scope.competitors = null;
         $scope.totalBrackets = 0;
 
+        var create_brackets = function(competitors)
+        {
+            $scope.competitors = competitors;
+
+            var competitorCount = Math.ceil($scope.competitors.length / 2);
+
+            calculate_bracket_size(competitorCount)
+
+            for (var i=0; i< $scope.tournamentSize; i++) {
+                $scope.brackets[0][i] = new bracketMaker(0)
+            }
+
+            //fill brackets
+            var remainder = 0
+            for (var i=0; i<$scope.tournamentSize; i++)
+            {
+                $scope.brackets[0][i].c1.name = $scope.competitors[i].name;
+                $scope.brackets[0][i].c1.rank = $scope.competitors[i].rank;
+                $scope.brackets[0][i].c1.id   = $scope.competitors[i].id;
+                remainder = i+1;
+            }
+
+            for (var j=0; j<$scope.tournamentSize; j++)
+            {
+                $scope.brackets[0][j].c2.name = $scope.competitors[remainder].name;
+                $scope.brackets[0][j].c2.rank = $scope.competitors[remainder].rank;
+                $scope.brackets[0][j].c2.id   = $scope.competitors[remainder].id;
+
+                remainder++;
+
+                if (remainder >= $scope.competitors.length)
+                {
+                    break;
+                }
+            }
+        }
+
         var load_brackets = function()
         {
             var p = dataLoader.getData();
             p.then(function(result)
             {
-                $scope.competitors = result.competitors;
-
-                var competitorCount = Math.ceil($scope.competitors.length / 2);
-
-                calculate_bracket_size(competitorCount)
-
-                for (var i=0; i< $scope.tournamentSize; i++) {
-                    $scope.brackets[0][i] = new bracketMaker(0)
-                }
-
-                //fill brackets
-                var remainder = 0
-                for (var i=0; i<$scope.tournamentSize; i++)
-                {
-                    $scope.brackets[0][i].c1.name = $scope.competitors[i].name;
-                    $scope.brackets[0][i].c1.rank = $scope.competitors[i].rank;
-                    $scope.brackets[0][i].c1.id   = $scope.competitors[i].id;
-                    remainder = i+1;
-                }
-
-                for (var j=0; j<$scope.tournamentSize; j++)
-                {
-                    $scope.brackets[0][j].c2.name = $scope.competitors[remainder].name;
-                    $scope.brackets[0][j].c2.rank = $scope.competitors[remainder].rank;
-                    $scope.brackets[0][j].c2.id   = $scope.competitors[remainder].id;
-
-                    remainder++;
-
-                    if (remainder >= $scope.competitors.length)
-                    {
-                        break;
-                    }
-                }
-
+                create_brackets( result.competitors );
             });
         }
 
@@ -202,7 +210,7 @@ angular.module('dreambjj', [])
 
         $scope.submitMatchResult = function(bracketLevel, bracketIndex)
         {
-            factor = (typeof( $scope.formData.matchKFactor ) != 'undefined') ? $scope.formData.matchKFactor : 10;
+            factor = (typeof( $scope.beltLevel ) != 'undefined') ? $scope.beltLevel : 10;
             //console.log(factor)
 
             var bracket = get_bracket_by_id(bracketIndex) //$scope.brackets[bracketLevel][bracketIndex];
@@ -260,11 +268,38 @@ angular.module('dreambjj', [])
         {
             load_brackets();
         }
-	})
+
+        $scope.UploadController = function ($scope, fileReader) {
+            $scope.getFile = function () {
+                $scope.progress = 0;
+                fileReader.readAsText($scope.file, $scope)
+                    .then(function(result)
+                    {
+                        var object = JSON.parse(result);
+                        create_brackets( object.competitors );
+                    });
+            };
+
+            $scope.$on("fileProgress", function(e, progress) {
+                $scope.progress = progress.loaded / progress.total;
+            });
+        };
+
+    })
     .directive('matchpair', function() {
         return {
             templateUrl: 'templates/matchpair.html'
         };
+    })
+    .directive("ngFileSelect",function(){
+        return {
+            link: function($scope,el){
+                el.bind("change", function(e){
+                    $scope.file = (e.srcElement || e.target).files[0];
+                    $scope.getFile();
+                })
+            }
+        }
     })
     .factory('bracketMaker', function() {
         totalBrackets=0;

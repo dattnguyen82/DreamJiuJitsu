@@ -25,19 +25,19 @@ angular.module('dreambjj', [])
             '#EBFAFF'
         ];
 
+        var maxBracket = 8192;
+
         $scope.formData = { };
 
         $scope.beltLevel = 20;
 
         $scope.competitorFile = "";
 
-        maxBracket = 8192;
-
         $scope.tournamentSize = 0;
         $scope.brackets = [[]];
 
         $scope.competitors = null;
-        $scope.totalBrackets = 0;
+        $scope.finalLevel = 0;
 
         var create_brackets = function(competitors)
         {
@@ -47,7 +47,9 @@ angular.module('dreambjj', [])
 
             calculate_bracket_size(competitorCount)
 
-            for (var i=0; i< $scope.tournamentSize; i++) {
+            $scope.brackets = [[]];
+
+            for (var i=0; i < $scope.tournamentSize; i++) {
                 $scope.brackets[0][i] = new bracketMaker(0);
                 $scope.brackets[0][i].color = bracketColorArray[0];
             }
@@ -89,13 +91,17 @@ angular.module('dreambjj', [])
         var calculate_bracket_size = function(count)
         {
             counter = maxBracket
+
             while ((counter | count) != count)
             {
                 counter = counter >> 1
             }
 
             $scope.tournamentSize = (count > counter) ? counter << 1 : count
-            //console.log("bracket size: " + $scope.tournamentSize)
+
+            $scope.finalLevel = Math.log($scope.tournamentSize) / Math.log(2);
+
+            //console.log("Final Level: " + $scope.finalLevel)
         }
 
         var calculate_expected_win = function(a, b)
@@ -110,7 +116,7 @@ angular.module('dreambjj', [])
 
         var calculate_rank = function(level, rank1, rank2, result)
         {
-            console.log(level + "," + rank1 + "," + rank2 + "," + result);
+            //console.log(level + "," + rank1 + "," + rank2 + "," + result);
 
             ew1 = calculate_expected_win(rank2, rank1)
             ew2 = calculate_expected_win(rank1, rank2)
@@ -266,7 +272,13 @@ angular.module('dreambjj', [])
                 winner = c1;
             }
 
-            find_or_insert_new_bracket( bracket, winner );
+            if (bracket.level >= $scope.finalLevel)
+            {
+                alert(winner.name + " is the winner!");
+            }
+            else {
+                find_or_insert_new_bracket(bracket, winner);
+            }
 
             bracket.disabled = true;
         };
@@ -342,4 +354,16 @@ angular.module('dreambjj', [])
             });
         };
         return { getData: getData };
+    })
+    .filter('range', function() {
+        return function(input, total)
+        {
+            total = parseInt(total);
+
+            for (var i=0; i<total; i++) {
+                input.push(i);
+            }
+
+            return input;
+        };
     });

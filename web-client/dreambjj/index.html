@@ -37,18 +37,15 @@
         </div>
 
         <br>
-<!--
-
-        <form name="matchForm" >
-         <button ng-click='loadBrackets()'>Load Brackets</button>
-        </form>
--->
-
         <br>
-        <div ng-repeat="bracketList in brackets">
-            <div ng-repeat="bracket in bracketList">
-                <div matchpair></div>
+
+        <div ng-repeat="n in [] | range:finalLevel+1">
+            <div ng-repeat="bracketList in brackets">
+                <div ng-repeat="bracket in bracketList | filter: {level: n} ">
+                    <div matchpair></div>
+                </div>
             </div>
+            <hr>
         </div>
         </p>
     </div>

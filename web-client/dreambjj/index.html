@@ -8,9 +8,10 @@
 <script src="js/angular.js"></script>
 <script src="js/app.js"></script>
 <script src="js/filereader.js"></script>
-<h1><p class="mono">Dream BJJ Bracket</p></h1>
 <div ng-controller='homeController' class="weather">
     <div>
+        <center>
+        <h1><p class="mono">Dream BJJ Bracket</p></h1>
         <p class="mono">
         <table border="1" cellspacing="2" cellpadding="2" width="640">
         <tr><td colspan="4" align="center" bgcolor="#BBBBBB">Tournament Level</td></tr>
@@ -24,29 +25,40 @@
             </tr>
         </table>
         <br><br>
-
+        </center>
 
         <b>Select competitor list file</b>
         <div ng-controller="UploadController ">
             <form>
                 <input type="file" ng-file-select="onFileSelect($files)" >
             </form>
-<!--
-            Progress: <progress value="{{progress}}"></progress>
--->
         </div>
 
         <br>
         <br>
 
+        <table>
+            <tr >
+                <td ng-repeat="n in [] | range:finalLevel+1">
+                <div ng-repeat="bracketList in brackets">
+                    <div ng-repeat="bracket in bracketList | filter: {level: n} ">
+                        <div matchpair></div>
+                    </div>
+                </div>
+                </td>
+            </tr>
+        </table>
+
+        <!--
         <div ng-repeat="n in [] | range:finalLevel+1">
             <div ng-repeat="bracketList in brackets">
                 <div ng-repeat="bracket in bracketList | filter: {level: n} ">
                     <div matchpair></div>
                 </div>
             </div>
-            <hr>
         </div>
+        <hr>-->
+
         </p>
     </div>
 </div>

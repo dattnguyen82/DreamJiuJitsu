@@ -1,5 +1,5 @@
 angular.module('dreambjj', [])
-	.controller('homeController', function($scope, $http, bracketMaker, dataLoader)
+	.controller('homeController', function($scope, $http, bracketMaker)
 	{
         var MatchResultsEnum = {
             SUB2: -1.5,
@@ -28,14 +28,10 @@ angular.module('dreambjj', [])
         var maxBracket = 8192;
 
         $scope.formData = { };
-
         $scope.beltLevel = 20;
-
         $scope.competitorFile = "";
-
         $scope.tournamentSize = 0;
         $scope.brackets = [[]];
-
         $scope.competitors = null;
         $scope.finalLevel = 0;
 
@@ -44,9 +40,10 @@ angular.module('dreambjj', [])
             $scope.competitors = competitors;
 
             var competitorCount = Math.ceil($scope.competitors.length / 2);
+            var bracketSize = calculate_bracket_size(competitorCount);
 
-            calculate_bracket_size(competitorCount)
-
+            $scope.tournamentSize = bracketSize.size;
+            $scope.finalLevel = bracketSize.finalLevel;
             $scope.brackets = [[]];
 
             for (var i=0; i < $scope.tournamentSize; i++) {
@@ -77,6 +74,7 @@ angular.module('dreambjj', [])
                     break;
                 }
             }
+
         }
 
         var load_brackets = function()
@@ -97,16 +95,23 @@ angular.module('dreambjj', [])
                 counter = counter >> 1
             }
 
-            $scope.tournamentSize = (count > counter) ? counter << 1 : count
+            var bracketInfo = { size: 0, finalLevel: 0};
 
-            $scope.finalLevel = Math.log($scope.tournamentSize) / Math.log(2);
+            bracketInfo.size = (count > counter) ? counter << 1 : count;
+            bracketInfo.finalLevel = (Math.log(bracketInfo.size) / Math.log(2));
 
-            //console.log("Final Level: " + $scope.finalLevel)
+            return bracketInfo;
         }
 
         var calculate_expected_win = function(a, b)
         {
-            return 1.0 / (1 + Math.pow(10, ((a - b) / 400.0)))
+            var winRate = { ew1: 0.0, ew2: 0.0 };
+
+            winRate.ew1 = 1.0 / (1 + Math.pow(10, ((b - a) / 400.0)));
+
+            winRate.ew2 = 1.0 / (1 + Math.pow(10, ((a - b) / 400.0)));
+
+            return winRate;
         }
 
         var calculate_elo = function(rank, factor, weight, expected)
@@ -116,12 +121,10 @@ angular.module('dreambjj', [])
 
         var calculate_rank = function(level, rank1, rank2, result)
         {
-            //console.log(level + "," + rank1 + "," + rank2 + "," + result);
+            var winRate = calculate_expected_win(rank1, rank2);
 
-            ew1 = calculate_expected_win(rank2, rank1)
-            ew2 = calculate_expected_win(rank1, rank2)
-            weight1 = 0
-            weight2 = 0
+            var weight1 = 0
+            var weight2 = 0
 
             if (result == MatchResultsEnum.DRAW)
             {
@@ -136,10 +139,10 @@ angular.module('dreambjj', [])
                 weight1 = result
             }
 
-            var newRanking = {rank1: 0, rank2: 0}
+            var newRanking = {rank1: 0, rank2: 0};
 
-            newRanking.rank1 = calculate_elo(rank1, level, weight1, ew1)
-            newRanking.rank2 = calculate_elo(rank2, level, weight2, ew2)
+            newRanking.rank1 = calculate_elo(rank1, level, weight1, winRate.ew1);
+            newRanking.rank2 = calculate_elo(rank2, level, weight2, winRate.ew2);
 
             return newRanking;
         };
@@ -152,7 +155,6 @@ angular.module('dreambjj', [])
                 {
                     $scope.competitors[i].rank = rank;
                     break;
-                    //console.log( $scope.competitors[i] )
                 }
             }
         }
@@ -234,17 +236,17 @@ angular.module('dreambjj', [])
             }
         }
 
-
         $scope.submitMatchResult = function(bracketLevel, bracketIndex)
         {
             factor = (typeof( $scope.beltLevel ) != 'undefined') ? $scope.beltLevel : 10;
             //console.log(factor)
 
-            var bracket = get_bracket_by_id(bracketIndex) //$scope.brackets[bracketLevel][bracketIndex];
+            var bracket = get_bracket_by_id(bracketIndex);
 
             var c1 = get_competitor_by_id(bracket.c1.id);
             var c2 = get_competitor_by_id(bracket.c2.id);
-            var winner = null
+
+            var winner = null;
 
             if (c2 != null)
             {
@@ -281,20 +283,6 @@ angular.module('dreambjj', [])
             }
 
             bracket.disabled = true;
-        };
-
-        $scope.getBracketSize = function()
-        {
-            count = $scope.formData.count;
-            calculate_bracket_size(count)
-        }
-
-        $scope.getRange = function(min, max, step)
-        {
-            step = step || 1;
-            var input = [];
-            for (var i = min; i <= max; i += step) input.push(i);
-            return input;
         };
 
         $scope.loadBrackets = function()
@@ -335,7 +323,7 @@ angular.module('dreambjj', [])
         }
     })
     .factory('bracketMaker', function() {
-        totalBrackets=0;
+        var totalBrackets=0; //id generator
         return function(level) {
             this.id = totalBrackets++;
             this.level = level;
@@ -346,15 +334,6 @@ angular.module('dreambjj', [])
             this.color = '#FFFFFF'
         }
     })
-    .factory('dataLoader', function($http){
-        var getData = function() {
-
-            return $http.get('data/w_purplebrown.json').then(function(result){
-                return result.data;
-            });
-        };
-        return { getData: getData };
-    })
     .filter('range', function() {
         return function(input, total)
         {
@@ -363,7 +342,6 @@ angular.module('dreambjj', [])
             for (var i=0; i<total; i++) {
                 input.push(i);
             }
-
             return input;
         };
     });

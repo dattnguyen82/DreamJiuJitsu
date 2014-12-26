@@ -1,15 +1,27 @@
 <div xmlns="http://www.w3.org/1999/html">
     <form name="matchForm" >
-        <table border="1" cellspacing="5" cellpadding="5" width="400">
-            <tr><td colspan="2" align="center" bgcolor="{{ bracket.color }}">Match: {{ bracket.id }}, level: {{ bracket.level }}</td></tr>
-
-            <tr><td>name: {{ bracket.c1.name }}</td><td>rank: {{ bracket.c1.rank }}</td></tr>
-            <tr><td>name: {{ bracket.c2.name }}</td><td>rank: {{ bracket.c2.rank }}</td></tr>
+        <table border="1" cellspacing="2" cellpadding="2" width="320">
+            <tr><td colspan="1" align="center" bgcolor="{{ bracket.color }}" id="dreambjj-mini">match: {{ bracket.id }}, level: {{ bracket.level }}</td></tr>
+            <tr><td>
+                <div id="matchpair-competitor">
+                {{ bracket.c1.name }}<br>
+                </div>
+                <div id="matchpair-rank">
+                rank: {{ bracket.c1.rank }}
+                </div>
+            </td></tr>
+            <tr bgcolor="#d3d3d3"><td>
+                <div id="matchpair-competitor">
+                {{ bracket.c2.name }}<br>
+                </div>
+                <div id="matchpair-rank">
+                rank: {{ bracket.c2.rank }}
+                </div>
+            </td></tr>
 
             <tr>
                 <div class="result">
-                    <td colspan="2">
-                        Match result:
+                    <td colspan="1">
                         <select ng-model="bracket.result">
                             <!-- <option value="0.5" selected="selected">Draw</option> #f0f8ff -->
                             <option value="1.5">{{ bracket.c1.name }} wins by submission</option>
@@ -17,7 +29,6 @@
                             <option value="-1.5">{{ bracket.c2.name }} wins by submission</option>
                             <option value="-1.0">{{ bracket.c2.name }} wins by points</option>
                         </select>
-
                         <input type="text" name="bracketIndex" ng-value="bracket.id" style="display: none;"/>
 
                         <button ng-click='submitMatchResult(bracket.level, bracket.id)' ng-disabled="bracket.disabled">Submit Match</button>

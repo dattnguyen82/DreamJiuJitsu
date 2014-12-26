@@ -1,3 +1,24 @@
-p.mono {
+.center {
+    text-align: center;
+}
+
+#dreambjj-font {
     font-family: "Lucida Console", monospace;
+    font-size: 16px;
+}
+
+#dreambjj-mini {
+    font-family: "Lucida Console", monospace;
+    font-size: 10px;
+}
+
+#matchpair-competitor {
+    font-family: "Lucida Console", monospace;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#matchpair-rank {
+    font-family: "Lucida Console", monospace;
+    font-size: 10px;
 }

@@ -3,29 +3,34 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>Dream BJJ Bracketology</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body ng-app="dreambjj">
 <script src="js/angular.js"></script>
 <script src="js/app.js"></script>
-<script src="js/filereader.js"></script>
+<script src="js/directives/fileselect.js"></script>
+<script src="js/directives/matchpair.js"></script>
+<script src="js/factories/bracketmaker.js"></script>
+<script src="js/filters/filters.js"></script>
+<script src="js/modules/filereader.js"></script>
 <div ng-controller='homeController' class="weather">
     <div>
+        <h1 class="center">Dream BJJ Bracket</h1>
         <center>
-        <h1><p class="mono">Dream BJJ Bracket</p></h1>
-        <p class="mono">
         <table border="1" cellspacing="2" cellpadding="2" width="640">
         <tr><td colspan="4" align="center" bgcolor="#BBBBBB">Tournament Level</td></tr>
             <tr>
                 <div class="level">
-                    <td><input type="radio" name="black" value="20" ng-model="beltLevel">black (k=20)</td>
+                    <td><input type="radio" name="black" value="20" ng-model="beltLevel" >black (k=20)</td>
                     <td><input type="radio" name="brownpurple" value="15" ng-model="beltLevel">purple/brown (k=15)</td>
                     <td><input type="radio" name="bluewhite" value="10" checked ng-model="beltLevel">white/blue (k=10)</td>
                     <td><input type="radio" name="kids" value="5" ng-model="beltLevel">kids (k=5)</td>
+                    </p>
                 </div>
             </tr>
         </table>
-        <br><br>
         </center>
+        <br><br>
 
         <b>Select competitor list file</b>
         <div ng-controller="UploadController ">
@@ -59,7 +64,6 @@
         </div>
         <hr>-->
 
-        </p>
     </div>
 </div>
 </body>

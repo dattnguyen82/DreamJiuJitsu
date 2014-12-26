@@ -1,5 +1,5 @@
 angular.module('dreambjj', [])
-	.controller('homeController', function($scope, $http, bracketMaker)
+	.controller('homeController', function($scope, $http, bracketmaker)
 	{
         var MatchResultsEnum = {
             SUB2: -1.5,
@@ -47,7 +47,7 @@ angular.module('dreambjj', [])
             $scope.brackets = [[]];
 
             for (var i=0; i < $scope.tournamentSize; i++) {
-                $scope.brackets[0][i] = new bracketMaker(0);
+                $scope.brackets[0][i] = new bracketmaker(0);
                 $scope.brackets[0][i].color = bracketColorArray[0];
             }
 
@@ -226,7 +226,7 @@ angular.module('dreambjj', [])
                     $scope.brackets[newLevel] = [];
                 }
 
-                $scope.brackets[newLevel][bracketSize] = new bracketMaker(newLevel);
+                $scope.brackets[newLevel][bracketSize] = new bracketmaker(newLevel);
                 $scope.brackets[newLevel][bracketSize].c1.id = winner.id;
                 $scope.brackets[newLevel][bracketSize].c1.name = winner.name;
                 $scope.brackets[newLevel][bracketSize].c1.rank = winner.rank;
@@ -306,42 +306,4 @@ angular.module('dreambjj', [])
             });
         };
 
-    })
-    .directive('matchpair', function() {
-        return {
-            templateUrl: 'templates/matchpair.html'
-        };
-    })
-    .directive("ngFileSelect",function(){
-        return {
-            link: function($scope,el){
-                el.bind("change", function(e){
-                    $scope.file = (e.srcElement || e.target).files[0];
-                    $scope.getFile();
-                })
-            }
-        }
-    })
-    .factory('bracketMaker', function() {
-        var totalBrackets=0; //id generator
-        return function(level) {
-            this.id = totalBrackets++;
-            this.level = level;
-            this.c1 = {id:-1, name: "--", rank:0};
-            this.c2 = {id:-1, name: "--", rank:0};
-            this.result = 0.0;
-            this.disabled = false;
-            this.color = '#FFFFFF'
-        }
-    })
-    .filter('range', function() {
-        return function(input, total)
-        {
-            total = parseInt(total);
-
-            for (var i=0; i<total; i++) {
-                input.push(i);
-            }
-            return input;
-        };
     });
